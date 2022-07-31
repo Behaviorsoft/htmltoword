@@ -79,16 +79,17 @@ module Htmltoword
           #stream the image files into the media folder using open-uri
             @image_files.each do |hash|
               out.put_next_entry("word/media/#{hash[:filename]}")
-              retries = 5
+              retries = 10
               while retries >= 1
                 begin
-                  URI.open(hash[:url], 'rb', { read_timeout: 100, open_timeout: 10 }) do |f|
+                  URI.open(hash[:url], 'rb', { read_timeout: 200, open_timeout: 200 }) do |f|
                     out.write(f.read)
                   end
                   break
-                rescue Net::OpenTimeout, Net::ReadTimeout => e
+                rescue Timeout::Error => e
                   raise e if retries <= 1
                   retries -= 1
+                  sleep 10
                 end
               end
             end
