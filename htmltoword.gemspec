@@ -18,6 +18,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_dependency "actionpack"
+  spec.add_dependency "resolv-replace"
   spec.add_dependency "nokogiri"
   spec.add_dependency "rubyzip", ">= 1.0"
   spec.add_development_dependency "rspec"
