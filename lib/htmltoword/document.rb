@@ -84,7 +84,7 @@ module Htmltoword
               retries = 10
               while retries >= 1
                 begin
-                  URI.open(hash[:url], 'rb', { read_timeout: 200, open_timeout: 200 }) do |f|
+                  URI.open(hash[:url], 'rb', { read_timeout: 200, open_timeout: 200, ssl_verify_mode: OpenSSL::SSL::VERIFY_NONE }) do |f|
                     out.write(f.read)
                   end
                   break
