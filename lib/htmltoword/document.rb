@@ -80,7 +80,7 @@ module Htmltoword
             @image_files.each do |hash|
               out.put_next_entry("word/media/#{hash[:filename]}")
               retries = 5
-              while retries <= 1
+              while retries >= 1
                 begin
                   URI.open(hash[:url], 'rb', { read_timeout: 100, open_timeout: 10 }) do |f|
                     out.write(f.read)
